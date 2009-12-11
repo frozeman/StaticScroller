@@ -1,10 +1,19 @@
 /*
 ---
-description:
-license: MIT-style
-authors: Luke Ehresman
-requires: [core:1.2]
-provides: [StaticScroller]
+description: StaticScroller
+
+license:
+  MIT-style
+
+authors:
+  - Luke Ehresman (http://luke.ehresman.org)
+
+requires:
+  core/1.2.1: '*'
+
+provides:
+  - StaticScroller
+
 ...
 */
 var StaticScroller = new Class({
