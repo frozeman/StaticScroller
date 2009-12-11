@@ -2,8 +2,8 @@
 ---
 description:
 license: MIT-style
-author: Luke Ehresman
-requires: []
+authors: Luke Ehresman
+requires: [core:1.2]
 provides: [StaticScroller]
 ...
 */
