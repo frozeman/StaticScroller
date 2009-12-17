@@ -76,9 +76,8 @@ var StaticScroller = new Class({
 		var collision = (this.scrollElement.getScroll().y >= this.originalPosition.y - this.options.offset);
 		var isPinned = this.isPinned();
 		if(collision) {
-			console.log(this.element.getStyle('top'));
 			if(!isPinned) {
-				this.element.pin().setStyle('top', this.options.offset);;
+				this.element.pin().setStyle('top', this.options.offset.toInt());
 			};
 		} else {
 			if(isPinned) this.reset();
