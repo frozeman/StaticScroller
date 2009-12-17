@@ -7,6 +7,7 @@ license:
 
 authors:
   - Luke Ehresman (http://luke.ehresman.org)
+	- Ryan Florence <rpforence@gmail.com>
 
 requires:
   core/1.2.1: '*'
@@ -17,26 +18,78 @@ provides:
 ...
 */
 var StaticScroller = new Class({
+	
 	Implements: Options,
-	container: null,
-	origPosition: null,
-	options: {
-		offset: 20
-	},
+	
+		options: {
+			offset: 20,
+			scrollElement: document
+		},
 
-	initialize: function(container, options) {
+	initialize: function(element, options) {
 		this.setOptions(options);
-		this.container = $(container);
-		this.origPosition = this.container.getPosition();
-
-		document.addEvent("scroll", function() {
-			if (document.getScroll().y >= this.origPosition.y - this.options.offset) {
-				this.container.setStyle("position", "relative");
-				this.container.setStyle("top", document.getScroll().y - this.origPosition.y + this.options.offset);
-			} else {
-				this.container.setStyle("position", "static");
-			}
-		}.bind(this));
-		document.fireEvent("scroll");
+		this.element = document.id(element);
+		this.scrollElement = document.id(this.options.scrollElement);
+		this.originalPosition = this.element.getPosition();
+		this.bound = {
+			scroll: this.scroll.bind(this),
+			resize: this.resize.bind(this)
+		};
+		this.attachWindow();
+		this.checkHeight();
+	},
+	
+	attachScroll: function(){
+		this.scrollElement.addEvent('scroll', this.bound.scroll);
+		return this;
+	},
+	
+	attachWindow: function(){
+		window.addEvent('resize', this.bound.resize);
+		return this;
+	},
+			
+	detachScroll: function(){
+		this.scrollElement.removeEvent('scroll', this.bound.scroll);
+		return this;
+	},
+	
+	detachWindow: function(){
+		window.removeEvent('resize', this.bound.resize);
+		return this;
+	},
+	
+	checkHeight: function(){
+		if(document.getSize().y < this.element.getSize().y) {
+			this.detachScroll().reset();
+		} else {
+			this.attachScroll().scroll();
+		}
+		return this;
+	},
+	
+	isPinned: function(){
+		return (this.element.retrieve('pinned'));
+	},
+	
+	scroll: function(){
+		var collision = (this.scrollElement.getScroll().y >= this.originalPosition.y - this.options.offset);
+		var isPinned = this.isPinned();
+		if(collision) {
+			if(!isPinned) this.element.pin();
+		} else {
+			if(isPinned) this.reset();
+		}	
+		return this;
+	},
+	
+	resize: function(){
+		if(this.isPinned()) this.reset();
+		this.checkHeight();
+		return this;
+	},
+	
+	reset: function(){
+		if(this.isPinned()) this.element.unpin().setStyle('position','');
 	}
 });

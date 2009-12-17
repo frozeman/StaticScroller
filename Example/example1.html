@@ -2,6 +2,7 @@
 <head>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js"></script>
 	<script type="text/javascript" src="../Source/StaticScroller.js"></script>
+	<script type="text/javascript" src="../Requires/Element.Pin.js"></script>
 	<style type="text/css">
 		#wrapper {
 			width: 800px;
@@ -26,8 +27,15 @@
 		#container {
 			background: #ccc;
 			padding: 10px;
+			height: 500px;
+			width: 180px;
 		}
 	</style>
+	<script type="text/javascript">
+	window.addEvent('domready', function() {
+		new StaticScroller('container');
+	});
+	</script>
 </head>
 <body>
 
@@ -39,7 +47,10 @@
 		<div id="container">
 			<p>Scroll up and down!</p>
 			<p>Notice how this sidebar slides so it's always visible.</p>
+			<p>It shouldn't attach, however, if it is longer than the viewport</p>
+			<p>It should detach if on resize of the browser window (would love it to stay put during this event but that's for a different day)</p>
 			<p>Nifty!</p>
+			
 		</div>
 	</div>
 	<div id="left">
@@ -53,12 +64,6 @@
 		<p>Fusce tristique leo nec nisi viverra laoreet. Sed euismod bibendum nunc ut fermentum. Phasellus lacinia sapien mi. Mauris condimentum, enim id eleifend fermentum, dolor ante placerat magna, ac convallis dui sapien a turpis. Duis fringilla condimentum fermentum. In libero metus, viverra eu aliquet sed, laoreet sed justo. Pellentesque sit amet justo velit. Donec sed leo nunc, ac convallis augue. Duis rutrum accumsan scelerisque. Etiam consequat volutpat augue, a congue tellus tempus at. Ut facilisis justo quis nisl bibendum in vestibulum nisi placerat. Nullam ipsum sapien, scelerisque non semper sit amet, gravida a leo. Donec sit amet sem felis. Curabitur a nunc quis nisl aliquet laoreet in ac augue. Nulla id tellus quis magna egestas suscipit id ac nisi. Praesent at dolor nulla, quis venenatis lacus. Etiam placerat feugiat arcu, eu eleifend nisl convallis sit amet. Nam varius ultrices erat, eget porttitor elit viverra vitae.</p>
 	</div>
 </div>
-
-<script type="text/javascript">
-window.addEvent("domready", function() {
-	new StaticScroller("container", {offset:10});
-});
-</script>
 
 </body>
 </html>
