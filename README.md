@@ -1,11 +1,13 @@
 StaticScroller
 ==============
 
-The StaticScroller will keep an element visible on the screen at all times,
-and does so in a visually appealing manner.  The element will stay in its
-static position until the user has scrolled past the element.  Then its
-position is dynamically changed so it stays in a fixed position using Element.Pin for browsers that support `position: fixed`.  When they scroll back up past its 
-original position, the element will again position itself in its original place.
+The StaticScroller will keep an element visible on the screen at all times, and
+does so in a visually appealing manner.  The element will stay in its static
+position until the user has scrolled past the element.  Then its position is
+dynamically changed so it stays in a fixed position using Element.Pin for
+browsers that support `position: fixed`.  When they scroll back up past its
+original position, the element will again position itself in its original
+place.
 
 ![Screenshot](http://luke.ehresman.org/sandbox/StaticScroller/Screenshots/example1.jpg)
 

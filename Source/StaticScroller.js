@@ -7,10 +7,11 @@ license:
 
 authors:
   - Luke Ehresman (http://luke.ehresman.org)
-	- Ryan Florence <rpforence@gmail.com>
+  - Ryan Florence <rpforence@gmail.com>
 
 requires:
   core/1.2.1: '*'
+  /Element.Pin
 
 provides:
   - StaticScroller
