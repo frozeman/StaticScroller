@@ -11,10 +11,8 @@ authors:
 
 requires:
   core/1.2.1: '*'
-  /Element.Pin
 
-provides:
-  - StaticScroller
+provides: [StaticScroller]
 
 ...
 */
