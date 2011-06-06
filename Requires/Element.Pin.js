@@ -70,7 +70,7 @@ provides: [Element.Pin]
 				}
 			} else {
 				var op;
-				if (!Browser.Engine.trident){
+				if (!Browser.ie){
 					var parent = this.getParent();
 					op = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
 				}
@@ -90,7 +90,7 @@ provides: [Element.Pin]
 						left: p.x
 					};
 				}
-				this.setStyles($merge(reposition, {position: 'absolute'})).removeClass('isPinned');
+				this.setStyles(Object.merge({},reposition, {position: 'absolute'})).removeClass('isPinned');
 			}
 			return this;
 		},
