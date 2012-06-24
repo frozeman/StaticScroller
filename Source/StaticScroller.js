@@ -37,6 +37,9 @@ var StaticScroller = new Class({
 			resize: this.resize.bind(this)
 		};
 		this.stylePosition = this.element.getStyle('position');
+		this.styleTop      = this.element.getStyle('top');
+		this.styleLeft     = this.element.getStyle('left');
+		this.styleRight    = this.element.getStyle('right');
 		this.attachWindow();
 		this.checkHeight();
 	},
@@ -74,8 +77,8 @@ var StaticScroller = new Class({
 		return (this.element.retrieve('pinned'));
 	},
 	
-	scroll: function(){	  
-		var collision = (this.scrollElement.getScroll().y >= this.originalPosition.y - this.options.offset);		
+	scroll: function(){
+		var collision = (this.scrollElement.getScroll().y > this.originalPosition.y - this.options.offset);
 		var isPinned = this.isPinned();
 		
 		if(collision) {
@@ -84,10 +87,10 @@ var StaticScroller = new Class({
         if(this.options.offset.toInt() > 0)
           this.element.setStyle('top', this.options.offset.toInt());
 				this.element.store('pinned',true);
-			};
-		} else {		  
+			}
+		} else {
 			if(isPinned) this.reset();
-		};
+		}
 		return this;
 	},
 	
@@ -99,7 +102,12 @@ var StaticScroller = new Class({
 	
 	reset: function(){
 		if(this.isPinned()) {
-      this.element.unpin().setStyle('position',this.stylePosition);
+      this.element.unpin().setStyles({
+				'position':this.stylePosition,
+				'top':this.styleTop,
+				'left':this.styleLeft,
+				'right':this.styleRight
+			});
       this.element.store('pinned',false);
     }
 	}
